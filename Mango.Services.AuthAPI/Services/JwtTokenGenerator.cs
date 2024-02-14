@@ -1,6 +1,7 @@
 ﻿using Mango.Services.AuthAPI.Models;
 using Mango.Services.AuthAPI.Services.IService;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Data;
 using System.IdentityModel.Tokens.Jwt;
@@ -13,8 +14,8 @@ namespace Mango.Services.AuthAPI.Services
 
     {
         private readonly JwtOptions _jwtOptions;
-        public JwtTokenGenerator(JwtOptions jwtOptions) {
-            _jwtOptions = jwtOptions;
+        public JwtTokenGenerator(IOptions<JwtOptions> jwtOptions) {
+            _jwtOptions = jwtOptions.Value;
 
         }
         string IJwtTokenGenerator.GenerateToken(ApplicationUser applicationUser)
